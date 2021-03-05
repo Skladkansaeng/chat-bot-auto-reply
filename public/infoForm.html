@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Info</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <form>
+      <div>
+        <label class="form-label">Claim number</label>
+        <input type="text" class="form-control" id="claimNumber">
+      </div>
+      <div>
+        <label class="form-label">Name - Surname</label>
+        <input type="text" class="form-control" id="name">
+      </div>
+      <div>
+        <label class="form-label">Telephone</label>
+        <input type="number" class="form-control" id="tel">
+      </div>
+      <div>
+        <button type="button" id="btnSubmit" class="btn btn-primary"
+          style="margin-top:10px; width: 100%;">Submit</button>
+        <script>
+          let token = window.location.href.split('/').pop()
+          let url = `https://${window.location.hostname}/api/userinfo`
+          $('#btnSubmit').click(() => {
+            let body = {
+              token,
+              claimNumber: $('#claimNumber').val(),
+              name: $('#name').val(),
+              tel: $('#tel').val(),
+            }
+            axios.post(url, body).then(res => console.log(res)).catch(err => console.log(err))
+          })
+          axios.get(`${url}/?token=${token}`).then(res => console.log(res)).catch(err => console.log(err))
+
+        </script>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>
