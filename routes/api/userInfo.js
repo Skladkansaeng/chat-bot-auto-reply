@@ -7,11 +7,12 @@ const _ = require('lodash')
 router.post('', ({ body }, res) => {
   let { token } = body
   let user = jwt.decode(token, salt)
+  let statusCode = 400
   if (user) {
     setUserInfo({ ...user, ..._.omit(body, 'token') })
-    res.sendStatus(201)
+    statusCode = 201
   }
-  res.sendStatus(400)
+  res.sendStatus(statusCode)
 })
 
 router.get('', ({ query }, res) => {

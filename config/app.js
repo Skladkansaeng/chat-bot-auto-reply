@@ -1,0 +1,1 @@
+const host = process.HOST || ''

@@ -40,7 +40,7 @@
               name: $('#name').val(),
               tel: $('#tel').val(),
             }
-            axios.post(url, body).then(res => console.log(res)).catch(err => console.log(err))
+            axios.post(url, body).then(() => { confirm("Update Success!!, Back to Line ?? ") && close() }).catch(err => console.log(err))
           })
           axios.get(`${url}/?token=${token}`).then(res => console.log(res)).catch(err => console.log(err))
 
