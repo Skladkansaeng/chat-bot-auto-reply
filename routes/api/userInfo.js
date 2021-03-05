@@ -17,7 +17,7 @@ router.post('', ({ body }, res) => {
 
 router.get('', ({ query }, res) => {
   let { token } = query
-  let { userId } = jwt.decode(token, salt)
+  let { userId } = jwt.decode(token, salt) || {}
   res.send(getUserInfo(userId))
 })
 module.exports = router

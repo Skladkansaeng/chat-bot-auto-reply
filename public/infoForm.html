@@ -16,10 +16,6 @@
   <div class="container">
     <form>
       <div>
-        <label class="form-label">Claim number</label>
-        <input type="text" class="form-control" id="claimNumber">
-      </div>
-      <div>
         <label class="form-label">Name - Surname</label>
         <input type="text" class="form-control" id="name">
       </div>
@@ -33,16 +29,19 @@
         <script>
           let token = window.location.href.split('/').pop()
           let url = `https://${window.location.hostname}/api/userinfo`
-          $('#btnSubmit').click(() => {
+          $('#btnSubmit').click(async () => {
             let body = {
               token,
-              claimNumber: $('#claimNumber').val(),
               name: $('#name').val(),
               tel: $('#tel').val(),
             }
-            axios.post(url, body).then(() => { confirm("Update Success!!, Back to Line ?? ") && close() }).catch(err => console.log(err))
+            axios.post(url, body).then(() => { confirm("Update Success!!, Back to Line ?? ") && window.open("about:blank", "_self").close() }).catch(err => console.log(err))
           })
-          axios.get(`${url}/?token=${token}`).then(res => console.log(res)).catch(err => console.log(err))
+          axios.get(`${url}/?token=${token}`).then(({ data }) => {
+            let { name, tel } = data
+            $('#name').val(name)
+            $('#tel').val(tel)
+          }).catch(err => console.log(err))
 
         </script>
       </div>

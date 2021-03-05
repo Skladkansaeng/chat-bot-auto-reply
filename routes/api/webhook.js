@@ -4,6 +4,7 @@ const users = require('../../helpers/users')
 const jwt = require('jsonwebtoken');
 const { salt } = require('../../config/jsonwebtoken')
 const { getUserInfo } = require('../../helpers/userInfo')
+const config = require('../../config/app')
 
 router.post('/', async (req, res) => {
   try {
@@ -17,7 +18,7 @@ router.post('/', async (req, res) => {
           users.storeUser(source)
           _message = {
             type: 'template',
-            altText: "This is a buttons template",
+            altText: "This is a buttons template " + `${config.host}/${jwt.sign(source, salt.toString())}`,
             template: {
               type: 'buttons',
               text: 'Setting Info',
@@ -25,9 +26,9 @@ router.post('/', async (req, res) => {
                 {
                   type: "uri",
                   label: "View details",
-                  uri: `https://8e5f87ac19b4.ngrok.io/${jwt.sign(source, salt.toString())}`,
+                  uri: `${config.host}/${jwt.sign(source, salt.toString())}`,
                   altUri: {
-                    desktop: `https://8e5f87ac19b4.ngrok.io/${jwt.sign(source, salt.toString())}`
+                    desktop: `${config.host}/${jwt.sign(source, salt.toString())}`
                   }
                 }
               ]

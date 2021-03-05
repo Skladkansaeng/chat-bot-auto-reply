@@ -1,10 +1,12 @@
 const express = require('express'),
   app = express()
+const path = require('path')
 
 // crontab 
 require('./services/cron.service').run()
 
 // Config
+app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
