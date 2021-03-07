@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     let { replyToken, message, source } = events
     let { text, type } = message
     if (type === 'text') {
-      let _message = {}
+      let _message = null
       switch (text) {
         case '1':
           users.storeUser(source)
@@ -41,8 +41,11 @@ router.post('/', async (req, res) => {
             text: JSON.stringify(getUserInfo(source.userId) || {})
           }
           break
+        case '3':
+          require('../../helpers/jibApi').pushMessageClaim(source.userId)
+          break
       }
-      client.replyMessage(replyToken, _message)
+      _message && client.replyMessage(replyToken, _message)
     }
     res.sendStatus(200)
   }
