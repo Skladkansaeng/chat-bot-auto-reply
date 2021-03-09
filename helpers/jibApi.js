@@ -29,7 +29,14 @@ const jibCaller = (tel, callback) => {
 const pushMessageClaim = (userId) => {
     let { tel } = getUserInfo(userId) || {}
     jibCaller(tel, (_, __, body) => {
-        let claims = JSON.parse(body || {})
+        let claims = null
+        try {
+            claims = JSON.parse(body)
+        }
+        catch {
+            claims = []
+        }
+
         if (claims.length !== undefined)
             claims.forEach(async claim => {
                 let { claimno, claimname } = claim
