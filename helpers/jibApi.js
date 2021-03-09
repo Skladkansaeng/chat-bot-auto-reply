@@ -34,7 +34,7 @@ const pushMessageClaim = (userId) => {
             claims = JSON.parse(body)
         }
         catch {
-            claims = [{ claimno: 'CL-20210202714', claimsname: 'GG XTRFY GAMING MOUSE M4 RGB RETRO 1-Y' }]
+            claims = [{ claimno: 'CL-20210202714', claimname: 'GG XTRFY GAMING MOUSE M4 RGB RETRO 1-Y' }]
         }
 
         if (claims.length !== undefined)
