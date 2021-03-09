@@ -35,6 +35,9 @@ const pushMessageClaim = (userId) => {
         }
         catch {
             claims = []
+            console.log('err : ', _)
+            console.log('res : ', __)
+            console.log('body : ', body)
         }
 
         if (claims.length !== undefined)
