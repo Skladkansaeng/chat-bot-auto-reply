@@ -42,6 +42,8 @@ const pushMessageClaim = (userId) => {
                 let { claimno, claimname } = claim
                 client.pushMessage(userId, { type: 'text', text: `หมายเลขเคลม : ${claimno}` })
                 client.pushMessage(userId, { type: 'text', text: `สินค้าที่เคลม : ${claimname}` })
+                client.pushMessage(userId, { type: 'text', text: `link : https://www.jib.co.th/web/claim/claim_report/${claimno}` })
+
                 const puppeteer = require('puppeteer');
                 (async () => {
                     const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
